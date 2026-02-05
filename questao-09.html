@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAEP - Questão 9</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="question-page">
+    <header class="exam-header">
+        <div class="header-content">
+            <div class="header-left">
+                <h1>SAEP</h1>
+                <span class="header-subtitle">Sistema de Avaliação</span>
+            </div>
+            <div class="header-right">
+                <div class="user-info">
+                    <span class="user-label">Candidato:</span>
+                    <span class="user-name" id="userName">--</span>
+                </div>
+                <div class="timer-box">
+                    <span class="timer-label">Tempo:</span>
+                    <span class="timer" id="timer">00:00:00</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="progress-bar">
+        <div class="progress-fill" style="width: 90%"></div>
+    </div>
+
+    <main class="exam-container">
+        <div class="question-card">
+            <div class="question-header">
+                <span class="question-number">Questão 9 de 10</span>
+                <span class="question-category">Categoria: Sistemas Operacionais</span>
+            </div>
+
+            <div class="question-content">
+                <h2 class="question-title">Qual é a principal função de um sistema operacional?</h2>
+                
+                <p class="question-text">Os sistemas operacionais são fundamentais para o funcionamento de computadores modernos. Eles executam diversas tarefas essenciais que permitem a interação entre hardware, software e usuários.</p>
+            </div>
+
+            <form action="questao-10.html" method="get" class="answer-form">
+                <div class="options-container">
+                    <div class="option-item">
+                        <input type="radio" id="option-a" name="resposta" value="a" required>
+                        <label for="option-a">
+                            <span class="option-letter">A</span>
+                            <span class="option-text">Criar documentos e planilhas</span>
+                        </label>
+                    </div>
+
+                    <div class="option-item">
+                        <input type="radio" id="option-b" name="resposta" value="b">
+                        <label for="option-b">
+                            <span class="option-letter">B</span>
+                            <span class="option-text">Gerenciar recursos de hardware e software</span>
+                        </label>
+                    </div>
+
+                    <div class="option-item">
+                        <input type="radio" id="option-c" name="resposta" value="c">
+                        <label for="option-c">
+                            <span class="option-letter">C</span>
+                            <span class="option-text">Navegar na internet</span>
+                        </label>
+                    </div>
+
+                    <div class="option-item">
+                        <input type="radio" id="option-d" name="resposta" value="d">
+                        <label for="option-d">
+                            <span class="option-letter">D</span>
+                            <span class="option-text">Editar fotos e vídeos</span>
+                        </label>
+                    </div>
+
+                    <div class="option-item">
+                        <input type="radio" id="option-e" name="resposta" value="e">
+                        <label for="option-e">
+                            <span class="option-letter">E</span>
+                            <span class="option-text">Armazenar arquivos na nuvem</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <a href="questao-08.html" class="btn-secondary">Voltar</a>
+                    <button type="submit" class="btn-primary">Salvar e Avançar</button>
+                </div>
+            </form>
+        </div>
+
+        <aside class="question-navigator">
+            <h3>Navegação</h3>
+            <div class="nav-grid">
+                <a href="questao-01.html" class="nav-item answered">1</a>
+                <a href="questao-02.html" class="nav-item answered">2</a>
+                <a href="questao-03.html" class="nav-item answered">3</a>
+                <a href="questao-04.html" class="nav-item answered">4</a>
+                <a href="questao-05.html" class="nav-item answered">5</a>
+                <a href="questao-06.html" class="nav-item answered">6</a>
+                <a href="questao-07.html" class="nav-item answered">7</a>
+                <a href="questao-08.html" class="nav-item answered">8</a>
+                <a href="questao-09.html" class="nav-item active">9</a>
+                <a href="questao-10.html" class="nav-item">10</a>
+            </div>
+            <div class="nav-legend">
+                <div class="legend-item">
+                    <span class="legend-color active"></span>
+                    <span>Atual</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color answered"></span>
+                    <span>Respondida</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color"></span>
+                    <span>Não respondida</span>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <footer class="exam-footer">
+        <p>&copy; 2024 SAEP - Sistema de Avaliação Educacional</p>
+    </footer>
+
+    <script>
+        // Carregar dados do usuário
+        const userName = localStorage.getItem("usuario_nome") || "Candidato";
+        document.getElementById("userName").textContent = userName;
+
+        // Timer em tempo real
+        const inicioProva = Number(localStorage.getItem("inicio_prova"));
+        
+        function atualizarTimer() {
+            const agora = Date.now();
+            const tempoDecorrido = Math.floor((agora - inicioProva) / 1000);
+            
+            const horas = Math.floor(tempoDecorrido / 3600);
+            const minutos = Math.floor((tempoDecorrido % 3600) / 60);
+            const segundos = tempoDecorrido % 60;
+            
+            const tempoFormatado = 
+                String(horas).padStart(2, '0') + ':' +
+                String(minutos).padStart(2, '0') + ':' +
+                String(segundos).padStart(2, '0');
+            
+            document.getElementById("timer").textContent = tempoFormatado;
+        }
+
+        // Atualizar timer a cada segundo
+        atualizarTimer();
+        setInterval(atualizarTimer, 1000);
+
+        // Salvar resposta antes de sair
+        document.querySelector(".answer-form").addEventListener("submit", function(e) {
+            const respostaSelecionada = document.querySelector('input[name="resposta"]:checked');
+            if (respostaSelecionada) {
+                localStorage.setItem("q9", respostaSelecionada.value);
+            }
+        });
+    </script>
+</body>
+</html>

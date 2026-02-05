@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAEP - Resultado Final</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="login-page">
+
+    <div class="login-container">
+        <div class="login-header">
+            <div class="logo-box">
+                <h1>SAEP</h1>
+                <p>Sistema de Avaliação Educacional</p>
+            </div>
+        </div>
+
+        <div class="login-card">
+            <h2 style="text-align:center; color:#27AE60;">Avaliação Concluída</h2>
+            <p class="subtitle" style="text-align:center;">Resultado oficial do candidato</p>
+
+            <div style="background:#ECF0F1; padding:25px; border-radius:8px;">
+                <p><strong>Nome:</strong> <span id="resNome"></span></p>
+                <p><strong>CPF:</strong> <span id="resCpf"></span></p>
+                <p><strong>Acertos:</strong> <span id="resAcertos"></span></p>
+                <p><strong>Tempo Total:</strong> <span id="resTempo"></span></p>
+            </div>
+
+            <a href="login.html" class="btn-primary" style="margin-top:25px; text-align:center; text-decoration:none;">
+                Voltar ao início
+            </a>
+        </div>
+
+        <footer class="page-footer">
+            <p>&copy; 2024 SAEP - Todos os direitos reservados</p>
+        </footer>
+    </div>
+
+    <script>
+        const nome = localStorage.getItem("usuario_nome");
+        const cpf = localStorage.getItem("usuario_cpf");
+        const inicio = Number(localStorage.getItem("inicio_prova"));
+        const fim = Date.now();
+
+        const tempoMs = fim - inicio;
+        const minutos = Math.floor(tempoMs / 60000);
+        const segundos = Math.floor((tempoMs % 60000) / 1000);
+
+        // Gabarito real
+        const gabarito = {
+            q1: "A",
+            q2: "B",
+            q3: "C",
+            q4: "B",
+            q5: "B",
+            q6: "A",
+            q7: "D",
+            q8: "C",
+            q9: "B",
+            q10: "E"
+        };
+
+        let acertos = 0;
+
+        Object.keys(gabarito).forEach(q => {
+            if (localStorage.getItem(q) === gabarito[q]) {
+                acertos++;
+            }
+        });
+
+        document.getElementById("resNome").textContent = nome;
+        document.getElementById("resCpf").textContent = cpf;
+        document.getElementById("resTempo").textContent =
+            `${minutos} minutos e ${segundos} segundos`;
+        document.getElementById("resAcertos").textContent =
+            `${acertos} de ${Object.keys(gabarito).length}`;
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,657 @@
+/* ========================================
+   SAEP - Sistema de Avaliação Educacional
+   Cores: Laranja, Branco e Cinza
+   ======================================== */
+
+/* --- RESET E VARIÁVEIS --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Cores Principais */
+    --cor-laranja-principal: #FF6B35;
+    --cor-laranja-escuro: #E85A2A;
+    --cor-laranja-claro: #FF8C61;
+    
+    --cor-cinza-escuro: #2C3E50;
+    --cor-cinza-medio: #5A6C7D;
+    --cor-cinza-claro: #BDC3C7;
+    --cor-cinza-muito-claro: #ECF0F1;
+    
+    --cor-branco: #FFFFFF;
+    --cor-fundo: #F5F6F8;
+    
+    /* Cores de Feedback */
+    --cor-sucesso: #27AE60;
+    --cor-alerta: #F39C12;
+    --cor-erro: #E74C3C;
+    
+    /* Tipografia */
+    --fonte-principal: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --fonte-codigo: 'Courier New', Courier, monospace;
+    
+    /* Sombras */
+    --sombra-leve: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --sombra-media: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --sombra-forte: 0 8px 24px rgba(0, 0, 0, 0.2);
+    
+    /* Transições */
+    --transicao-padrao: all 0.3s ease;
+}
+
+body {
+    font-family: var(--fonte-principal);
+    background-color: var(--cor-fundo);
+    color: var(--cor-cinza-escuro);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* ========================================
+   PÁGINA DE LOGIN
+   ======================================== */
+
+.login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--cor-cinza-escuro) 0%, var(--cor-cinza-medio) 100%);
+    padding: 20px;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 480px;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo-box {
+    background-color: var(--cor-laranja-principal);
+    padding: 25px;
+    border-radius: 12px 12px 0 0;
+    box-shadow: var(--sombra-media);
+}
+
+.logo-box h1 {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--cor-branco);
+    letter-spacing: 4px;
+    margin-bottom: 8px;
+}
+
+.logo-box p {
+    font-size: 14px;
+    color: var(--cor-branco);
+    opacity: 0.95;
+    letter-spacing: 1px;
+}
+
+.login-card {
+    background-color: var(--cor-branco);
+    padding: 40px;
+    border-radius: 0 0 12px 12px;
+    box-shadow: var(--sombra-forte);
+}
+
+.login-card h2 {
+    font-size: 24px;
+    color: var(--cor-cinza-escuro);
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: var(--cor-cinza-medio);
+    margin-bottom: 30px;
+}
+
+.login-form {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--cor-cinza-escuro);
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 16px;
+    border: 2px solid var(--cor-cinza-claro);
+    border-radius: 8px;
+    transition: var(--transicao-padrao);
+    background-color: var(--cor-branco);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--cor-laranja-principal);
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+}
+
+.form-group input:valid {
+    border-color: var(--cor-sucesso);
+}
+
+.form-group input:invalid:not(:placeholder-shown) {
+    border-color: var(--cor-erro);
+}
+
+.input-hint {
+    display: block;
+    font-size: 12px;
+    color: var(--cor-cinza-medio);
+    margin-top: 6px;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--cor-branco);
+    background-color: var(--cor-laranja-principal);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transicao-padrao);
+    box-shadow: var(--sombra-leve);
+}
+
+.btn-primary:hover {
+    background-color: var(--cor-laranja-escuro);
+    box-shadow: var(--sombra-media);
+    transform: translateY(-2px);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.login-footer {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--cor-cinza-muito-claro);
+}
+
+.warning-text {
+    font-size: 13px;
+    color: var(--cor-cinza-medio);
+    text-align: center;
+    line-height: 1.5;
+}
+
+.page-footer {
+    text-align: center;
+    margin-top: 24px;
+    color: var(--cor-cinza-claro);
+    font-size: 12px;
+}
+
+/* ========================================
+   PÁGINA DE QUESTÕES
+   ======================================== */
+
+.question-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- CABEÇALHO DA PROVA --- */
+.exam-header {
+    background-color: var(--cor-cinza-escuro);
+    color: var(--cor-branco);
+    padding: 20px 30px;
+    box-shadow: var(--sombra-media);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.header-left h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--cor-laranja-principal);
+    margin-bottom: 4px;
+}
+
+.header-subtitle {
+    font-size: 12px;
+    color: var(--cor-cinza-claro);
+    letter-spacing: 1px;
+}
+
+.header-right {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+}
+
+.user-info, .timer-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.user-label, .timer-label {
+    font-size: 11px;
+    color: var(--cor-cinza-claro);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.user-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--cor-branco);
+}
+
+.timer {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--cor-laranja-claro);
+    font-family: var(--fonte-codigo);
+    letter-spacing: 1px;
+}
+
+/* --- BARRA DE PROGRESSO --- */
+.progress-bar {
+    height: 6px;
+    background-color: var(--cor-cinza-muito-claro);
+    position: sticky;
+    top: 80px;
+    z-index: 99;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--cor-laranja-principal), var(--cor-laranja-claro));
+    transition: width 0.5s ease;
+}
+
+/* --- CONTAINER PRINCIPAL --- */
+.exam-container {
+    display: flex;
+    gap: 30px;
+    max-width: 1400px;
+    margin: 40px auto;
+    padding: 0 30px;
+    flex: 1;
+}
+
+/* --- CARD DA QUESTÃO --- */
+.question-card {
+    flex: 1;
+    background-color: var(--cor-branco);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: var(--sombra-media);
+}
+
+.question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 3px solid var(--cor-laranja-principal);
+}
+
+.question-number {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--cor-laranja-principal);
+}
+
+.question-category {
+    font-size: 14px;
+    color: var(--cor-cinza-medio);
+    background-color: var(--cor-cinza-muito-claro);
+    padding: 6px 14px;
+    border-radius: 20px;
+}
+
+.question-content {
+    margin-bottom: 30px;
+}
+
+.question-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--cor-cinza-escuro);
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+.question-text {
+    font-size: 16px;
+    color: var(--cor-cinza-medio);
+    margin-bottom: 20px;
+    line-height: 1.7;
+}
+
+/* --- BLOCO DE CÓDIGO --- */
+.code-block {
+    background-color: var(--cor-cinza-escuro);
+    border-left: 4px solid var(--cor-laranja-principal);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 24px 0;
+    overflow-x: auto;
+}
+
+.code-block pre {
+    margin: 0;
+}
+
+.code-block code {
+    font-family: var(--fonte-codigo);
+    font-size: 15px;
+    color: #A8DADC;
+    line-height: 1.6;
+}
+
+/* --- OPÇÕES DE RESPOSTA --- */
+.answer-form {
+    margin-top: 30px;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.option-item {
+    position: relative;
+}
+
+.option-item input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.option-item label {
+    display: flex;
+    align-items: center;
+    padding: 18px 20px;
+    background-color: var(--cor-fundo);
+    border: 2px solid var(--cor-cinza-claro);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: var(--transicao-padrao);
+}
+
+.option-item label:hover {
+    background-color: var(--cor-cinza-muito-claro);
+    border-color: var(--cor-laranja-claro);
+    transform: translateX(5px);
+}
+
+.option-item input[type="radio"]:checked + label {
+    background-color: rgba(255, 107, 53, 0.1);
+    border-color: var(--cor-laranja-principal);
+    border-width: 3px;
+}
+
+.option-letter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--cor-branco);
+    border: 2px solid var(--cor-cinza-claro);
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--cor-cinza-medio);
+    margin-right: 16px;
+    transition: var(--transicao-padrao);
+}
+
+.option-item input[type="radio"]:checked + label .option-letter {
+    background-color: var(--cor-laranja-principal);
+    border-color: var(--cor-laranja-principal);
+    color: var(--cor-branco);
+}
+
+.option-text {
+    font-size: 16px;
+    color: var(--cor-cinza-escuro);
+    font-weight: 500;
+}
+
+/* --- AÇÕES DO FORMULÁRIO --- */
+.form-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: space-between;
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid var(--cor-cinza-muito-claro);
+}
+
+.btn-secondary {
+    padding: 14px 28px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--cor-cinza-medio);
+    background-color: var(--cor-cinza-muito-claro);
+    border: 2px solid var(--cor-cinza-claro);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transicao-padrao);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-secondary:hover {
+    background-color: var(--cor-cinza-claro);
+    color: var(--cor-cinza-escuro);
+}
+
+.form-actions .btn-primary {
+    width: auto;
+    padding: 14px 32px;
+    font-size: 15px;
+}
+
+/* --- NAVEGADOR DE QUESTÕES --- */
+.question-navigator {
+    width: 320px;
+    background-color: var(--cor-branco);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: var(--sombra-media);
+    height: fit-content;
+    position: sticky;
+    top: 120px;
+}
+
+.question-navigator h3 {
+    font-size: 18px;
+    color: var(--cor-cinza-escuro);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--cor-laranja-principal);
+    font-weight: 700;
+}
+
+.nav-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: var(--cor-fundo);
+    border: 2px solid var(--cor-cinza-claro);
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--cor-cinza-medio);
+    text-decoration: none;
+    transition: var(--transicao-padrao);
+    cursor: pointer;
+}
+
+.nav-item:hover {
+    background-color: var(--cor-cinza-muito-claro);
+    border-color: var(--cor-laranja-claro);
+    transform: scale(1.15);
+    box-shadow: var(--sombra-leve);
+}
+
+.nav-item.active {
+    background-color: var(--cor-laranja-principal);
+    border-color: var(--cor-laranja-escuro);
+    color: var(--cor-branco);
+    box-shadow: var(--sombra-media);
+    transform: scale(1.1);
+}
+
+.nav-item.answered {
+    background-color: var(--cor-sucesso);
+    border-color: #229954;
+    color: var(--cor-branco);
+}
+
+.nav-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 20px;
+    border-top: 1px solid var(--cor-cinza-muito-claro);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--cor-cinza-medio);
+    font-weight: 500;
+}
+
+.legend-color {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    border: 2px solid var(--cor-cinza-claro);
+    background-color: var(--cor-fundo);
+}
+
+.legend-color.active {
+    background-color: var(--cor-laranja-principal);
+    border-color: var(--cor-laranja-principal);
+}
+
+.legend-color.answered {
+    background-color: var(--cor-sucesso);
+    border-color: var(--cor-sucesso);
+}
+
+/* --- RODAPÉ --- */
+.exam-footer {
+    background-color: var(--cor-cinza-escuro);
+    color: var(--cor-cinza-claro);
+    text-align: center;
+    padding: 20px;
+    margin-top: auto;
+    font-size: 13px;
+}
+
+/* ========================================
+   RESPONSIVIDADE
+   ======================================== */
+
+@media (max-width: 1024px) {
+    .exam-container {
+        flex-direction: column;
+    }
+    
+    .question-navigator {
+        width: 100%;
+        position: static;
+    }
+    
+    .nav-grid {
+        grid-template-columns: repeat(10, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 16px;
+    }
+    
+    .header-right {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .question-card {
+        padding: 24px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .btn-secondary, .form-actions .btn-primary {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-box h1 {
+        font-size: 36px;
+    }
+    
+    .login-card {
+        padding: 28px;
+    }
+    
+    .nav-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}

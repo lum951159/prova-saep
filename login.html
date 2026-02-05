@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAEP - Sistema de Avaliação</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="login-page">
+
+<div class="login-container">
+    <div class="login-header">
+        <div class="logo-box">
+            <h1>SAEP</h1>
+            <p>Sistema de Avaliação Educacional</p>
+        </div>
+    </div>
+
+    <div class="login-card">
+        <h2>Acesso ao Sistema</h2>
+        <p class="subtitle">Insira suas credenciais para iniciar a avaliação</p>
+
+        <form id="loginForm" class="login-form">
+            <div class="form-group">
+                <label for="cpf">CPF</label>
+                <input 
+                    type="text"
+                    id="cpf"
+                    placeholder="000.000.000-00"
+                    maxlength="14"
+                    required
+                >
+                <span class="input-hint">Digite apenas números</span>
+            </div>
+
+            <div class="form-group">
+                <label for="senha">Senha</label>
+                <input 
+                    type="password"
+                    id="senha"
+                    placeholder="Digite sua senha"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="btn-primary">Entrar no Sistema</button>
+        </form>
+
+        <div class="login-footer">
+            <p class="warning-text">⚠️ Avaliação oficial. Não atualize a página durante a prova.</p>
+        </div>
+    </div>
+
+    <footer class="page-footer">
+        <p>&copy; 2024 SAEP - Todos os direitos reservados</p>
+    </footer>
+</div>
+
+<script>
+const cpfInput = document.getElementById("cpf");
+
+cpfInput.addEventListener("input", () => {
+    let value = cpfInput.value.replace(/\D/g, "").slice(0, 11);
+
+    value = value.replace(/(\d{3})(\d)/, "$1.$2");
+    value = value.replace(/(\d{3})(\d)/, "$1.$2");
+    value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+
+    cpfInput.value = value;
+});
+
+document.getElementById("loginForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const cpf = cpfInput.value;
+
+    localStorage.setItem("usuario_nome", "Miguel Boas");
+    localStorage.setItem("usuario_cpf", cpf);
+    localStorage.setItem("inicio_prova", Date.now());
+
+    window.location.href = "questao-01.html";
+});
+</script>
+
+</body>
+</html>
