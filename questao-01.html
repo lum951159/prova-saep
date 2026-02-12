@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SAEP - Questão 1</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body class="question-page">
     <header class="exam-header">
         <div class="header-content">
@@ -39,7 +41,7 @@
 
             <div class="question-content">
                 <h2 class="question-title">Qual é o resultado da execução do seguinte código em Python?</h2>
-                
+
                 <div class="code-block">
                     <pre><code>x = 10
 y = 5
@@ -47,7 +49,8 @@ resultado = x // y + x % y
 print(resultado)</code></pre>
                 </div>
 
-                <p class="question-text">Assinale a alternativa que apresenta o valor correto que será impresso na tela:</p>
+                <p class="question-text">Assinale a alternativa que apresenta o valor correto que será impresso na tela:
+                </p>
             </div>
 
             <form action="questao-02.html" method="get" class="answer-form">
@@ -94,7 +97,7 @@ print(resultado)</code></pre>
                 </div>
 
                 <div class="form-actions">
-                    <a href="login.html" class="btn-secondary">Voltar ao Login</a>
+                    <a href="index.html" class="btn-secondary">Voltar ao Login</a>
                     <button type="submit" class="btn-primary">Salvar e Avançar</button>
                 </div>
             </form>
@@ -138,20 +141,20 @@ print(resultado)</code></pre>
 
         // Timer em tempo real
         const inicioProva = Number(localStorage.getItem("inicio_prova"));
-        
+
         function atualizarTimer() {
             const agora = Date.now();
             const tempoDecorrido = Math.floor((agora - inicioProva) / 1000);
-            
+
             const horas = Math.floor(tempoDecorrido / 3600);
             const minutos = Math.floor((tempoDecorrido % 3600) / 60);
             const segundos = tempoDecorrido % 60;
-            
-            const tempoFormatado = 
+
+            const tempoFormatado =
                 String(horas).padStart(2, '0') + ':' +
                 String(minutos).padStart(2, '0') + ':' +
                 String(segundos).padStart(2, '0');
-            
+
             document.getElementById("timer").textContent = tempoFormatado;
         }
 
@@ -160,7 +163,7 @@ print(resultado)</code></pre>
         setInterval(atualizarTimer, 1000);
 
         // Salvar resposta antes de sair
-        document.querySelector(".answer-form").addEventListener("submit", function(e) {
+        document.querySelector(".answer-form").addEventListener("submit", function (e) {
             const respostaSelecionada = document.querySelector('input[name="resposta"]:checked');
             if (respostaSelecionada) {
                 localStorage.setItem("q1", respostaSelecionada.value);
@@ -168,4 +171,5 @@ print(resultado)</code></pre>
         });
     </script>
 </body>
+
 </html>

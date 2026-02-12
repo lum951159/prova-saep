@@ -23,15 +23,15 @@
             <p class="subtitle" style="text-align:center;">Resultado oficial do candidato</p>
 
             <div style="background:#ECF0F1; padding:25px; border-radius:8px;">
-                <p><strong>Nome:</strong> <span id="resNome"></span></p>
-                <p><strong>CPF:</strong> <span id="resCpf"></span></p>
-                <p><strong>Acertos:</strong> <span id="resAcertos"></span></p>
-                <p><strong>Tempo Total:</strong> <span id="resTempo"></span></p>
+                <p style="margin-bottom:12px;"><strong>Nome:</strong> <span id="resNome">-</span></p>
+                <p style="margin-bottom:12px;"><strong>CPF:</strong> <span id="resCpf">-</span></p>
+                <p style="margin-bottom:12px;"><strong>Acertos:</strong> <span id="resAcertos">0</span> de 10</p>
+                <p style="margin-bottom:0;"><strong>Tempo Total:</strong> <span id="resTempo">-</span></p>
             </div>
 
-            <a href="login.html" class="btn-primary" style="margin-top:25px; text-align:center; text-decoration:none;">
+            <button class="btn-primary" onclick="window.location.href='index.html'" style="width:100%; margin-top:25px;">
                 Voltar ao início
-            </a>
+            </button> 
         </div>
 
         <footer class="page-footer">
@@ -40,43 +40,92 @@
     </div>
 
     <script>
-        const nome = localStorage.getItem("usuario_nome");
-        const cpf = localStorage.getItem("usuario_cpf");
-        const inicio = Number(localStorage.getItem("inicio_prova"));
-        const fim = Date.now();
+        // Parar todos os timers e intervals globais
+        let timerInterval = null;
 
-        const tempoMs = fim - inicio;
-        const minutos = Math.floor(tempoMs / 60000);
-        const segundos = Math.floor((tempoMs % 60000) / 1000);
+        // Aguardar o DOM carregar completamente
+        window.addEventListener('load', function() {
+            const nome = localStorage.getItem("usuario_nome") || "Não informado";
+            const cpf = localStorage.getItem("usuario_cpf") || "Não informado";
+            const inicio = Number(localStorage.getItem("inicio_prova"));
+            const fim = Date.now();
 
-        // Gabarito real
-        const gabarito = {
-            q1: "A",
-            q2: "B",
-            q3: "C",
-            q4: "B",
-            q5: "B",
-            q6: "A",
-            q7: "D",
-            q8: "C",
-            q9: "B",
-            q10: "E"
-        };
+            const tempoMs = fim - inicio;
+            const horas = Math.floor(tempoMs / 3600000);
+            const minutos = Math.floor((tempoMs % 3600000) / 60000);
+            const segundos = Math.floor((tempoMs % 60000) / 1000);
 
-        let acertos = 0;
+            // Gabarito real (em letras minúsculas para corresponder aos dados salvos)
+            const gabarito = {
+                q1: "a",
+                q2: "b",
+                q3: "c",
+                q4: "b",
+                q5: "b",
+                q6: "a",
+                q7: "d",
+                q8: "c",
+                q9: "b",
+                q10: "e"
+            };
 
-        Object.keys(gabarito).forEach(q => {
-            if (localStorage.getItem(q) === gabarito[q]) {
-                acertos++;
+            let acertos = 0;
+            let detalhesDebug = [];
+
+            // Contar acertos
+            for (let i = 1; i <= 10; i++) {
+                const chave = "q" + i;
+                const respostaUsuario = localStorage.getItem(chave);
+                const respostaCorreta = gabarito[chave];
+                
+                detalhesDebug.push(`Q${i}: Respondeu="${respostaUsuario}" | Gabarito="${respostaCorreta}" | Correto=${respostaUsuario === respostaCorreta}`);
+                
+                if (respostaUsuario === respostaCorreta) {
+                    acertos++;
+                }
             }
+
+            // Formatar tempo com zeros à esquerda
+            const tempoFormatado = 
+                String(horas).padStart(2, '0') + ':' +
+                String(minutos).padStart(2, '0') + ':' +
+                String(segundos).padStart(2, '0');
+
+            // Atualizar elementos HTML
+            document.getElementById("resNome").textContent = nome;
+            document.getElementById("resCpf").textContent = cpf;
+            document.getElementById("resTempo").textContent = tempoFormatado;
+            document.getElementById("resAcertos").textContent = acertos;
+
+            // Parar todos os timers globais
+            if (window.timerInterval) {
+                clearInterval(window.timerInterval);
+            }
+
+            // Limpar localStorage para a próxima prova
+            localStorage.removeItem("usuario_nome");
+            localStorage.removeItem("usuario_cpf");
+            localStorage.removeItem("inicio_prova");
+            for (let i = 1; i <= 10; i++) {
+                localStorage.removeItem("q" + i);
+            }
+
+            // Debug no console
+            console.log("=== RESULTADO FINAL ===");
+            console.log("Nome:", nome);
+            console.log("CPF:", cpf);
+            console.log("Acertos:", acertos, "de 10");
+            console.log("Tempo Total:", tempoFormatado);
+            console.log("Detalhes das questões:");
+            detalhesDebug.forEach(msg => console.log(msg));
         });
 
-        document.getElementById("resNome").textContent = nome;
-        document.getElementById("resCpf").textContent = cpf;
-        document.getElementById("resTempo").textContent =
-            `${minutos} minutos e ${segundos} segundos`;
-        document.getElementById("resAcertos").textContent =
-            `${acertos} de ${Object.keys(gabarito).length}`;
+        // Garantir que nenhum timer continua rodando
+        window.addEventListener('beforeunload', function() {
+            if (window.timerInterval) {
+                clearInterval(window.timerInterval);
+            }
+        });
     </script>
 
 </body>

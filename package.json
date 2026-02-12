@@ -1,0 +1,18 @@
+{
+  "name": "prova-saep",
+  "version": "2.0.0",
+  "description": "Sistema de Avaliação Educacional SAEP com Selenium",
+  "main": "simulado.test.js",
+  "scripts": {
+    "test:simulado": "node simulado.test.js",
+    "test:debug": "node --inspect-brk simulado.test.js",
+    "install:drivers": "webdriver-manager update",
+    "start": "http-server ."
+  },
+  "devDependencies": {
+    "selenium-webdriver": "^4.40.0",
+    "webdriver-manager": "^12.1.9",
+    "chromedriver": "^145.0.1"
+  },
+  "dependencies": {}
+}
